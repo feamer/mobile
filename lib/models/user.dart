@@ -5,10 +5,6 @@ class User {
 
   User(this._username, this._password, this._token);
 
-  User.map(this._username, this._password, dynamic obj) {
-    this._token = obj["token"];
-  }
-
   String get username => _username;
   String get password => _password;
   String get token => _token;

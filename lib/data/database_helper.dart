@@ -24,7 +24,7 @@ class DatabaseHelper {
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "main.db");
-    var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
+    var theDb = await openDatabase(path, version: 2, onCreate: _onCreate);
     return theDb;
   }
 
@@ -32,7 +32,7 @@ class DatabaseHelper {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE User(id INTEGER PRIMARY KEY, username TEXT, password TEXT, token TEXT)");
+        "CREATE TABLE User(id INTEGER PRIMARY KEY, username TEXT, password TEXT, token TEXT UNIQUE)");
     print("Created tables");
   }
 
@@ -52,6 +52,12 @@ class DatabaseHelper {
     var dbClient = await db;
     var res = await dbClient.query("User");
     return res.length > 0? true: false;
+  }
+
+  Future<String> selectToken() async {
+    var dbClient = await db;
+    var res = await dbClient.query("User");
+    return res.single["token"];
   }
 
 }

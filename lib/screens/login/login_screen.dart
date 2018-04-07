@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:mobile/auth.dart';
 import 'package:mobile/data/database_helper.dart';
@@ -47,7 +45,7 @@ class LoginScreenState extends State<LoginScreen>
 
   @override
   onAuthStateChanged(AuthState state) {
-    if(state == AuthState.LOGGED_IN)
+    if (state == AuthState.LOGGED_IN)
       Navigator.of(_ctx).pushReplacementNamed("/home");
   }
 
@@ -59,6 +57,7 @@ class LoginScreenState extends State<LoginScreen>
       child: new Text("LOGIN"),
       color: Colors.blue,
     );
+
     var loginForm = new Column(
       children: <Widget>[
         new Text(
@@ -92,7 +91,10 @@ class LoginScreenState extends State<LoginScreen>
             ],
           ),
         ),
-        _isLoading ? new CircularProgressIndicator() : loginBtn
+        new Padding(
+          padding: const EdgeInsets.only(top: 24.0),
+          child: _isLoading ? new CircularProgressIndicator() : loginBtn,
+        )
       ],
       crossAxisAlignment: CrossAxisAlignment.center,
     );
@@ -103,16 +105,10 @@ class LoginScreenState extends State<LoginScreen>
       body: new Container(
         child: new Center(
           child: new ClipRect(
-            child: new BackdropFilter(
-              filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: new Container(
-                child: loginForm,
-                height: 300.0,
-                width: 300.0,
-                decoration: new BoxDecoration(
-                    color: Colors.white
-                ),
-              ),
+            child: new Container(
+              child: loginForm,
+              height: 300.0,
+              width: 300.0,
             ),
           ),
         ),
@@ -124,8 +120,6 @@ class LoginScreenState extends State<LoginScreen>
   void onLoginError(String errorTxt) {
     _showSnackBar(errorTxt);
     setState(() => _isLoading = false);
-    var authStateProvider = new AuthStateProvider();
-    authStateProvider.notify(AuthState.LOGGED_IN);
   }
 
   @override
