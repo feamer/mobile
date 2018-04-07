@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class NetworkUtil {
@@ -23,7 +24,7 @@ class NetworkUtil {
   Future<dynamic> post(String url, {Map headers, body, encoding}) {
     return http
         .post(url, body: body, headers: headers, encoding: encoding)
-//        .timeout(new Duration(milliseconds: 5000))
+        .timeout(new Duration(seconds: 10))
         .then((http.Response response) {
       final String res = response.body;
       final int statusCode = response.statusCode;
