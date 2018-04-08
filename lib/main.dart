@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/routes.dart';
+import 'package:feamer/routes.dart';
 
 void main() => runApp(new Feamer());
 

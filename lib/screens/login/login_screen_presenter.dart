@@ -1,5 +1,5 @@
-import 'package:mobile/data/rest_ds.dart';
-import 'package:mobile/models/user.dart';
+import 'package:feamer/data/rest_ds.dart';
+import 'package:feamer/models/user.dart';
 
 abstract class LoginScreenContract {
   void onLoginSuccess(User user);

@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:feamer/screens/home/home_screen_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile/screens/home/home_screen_presenter.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -37,8 +37,14 @@ class HomeState extends State<HomeScreen> implements HomeScreenContract {
           title: new Text("Feamer"),
           actions: [
             new IconButton(
-                icon: new Icon(Icons.exit_to_app), onPressed: () => logout())
+                icon: new Icon(Icons.code), onPressed: () => addFriend()),
+            new IconButton(
+                icon: new Icon(Icons.exit_to_app), onPressed: () => logout()),
           ],
+        ),
+        floatingActionButton: new FloatingActionButton(
+            onPressed: () => Navigator.of(context).pushNamed("/friends"),
+            child: const Icon(Icons.face)
         ),
         body: new Column(children: [
           new Center(
@@ -57,14 +63,16 @@ class HomeState extends State<HomeScreen> implements HomeScreenContract {
                     : new Text(""),
           ),
           new Center(
-              child: new Container(
-                  child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                new Icon(Icons.attach_file,
-                    color: Colors.grey[500], size: 100.0),
-                new Text("Stored download file at $downloadedFile"),
-              ])))
+              child: downloadedFile != ""
+                  ? new Container(
+                      child: new Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                          new Icon(Icons.attach_file,
+                              color: Colors.grey[500], size: 100.0),
+                          new Text("Stored download file at $downloadedFile"),
+                        ]))
+                  : new Text(""))
         ]));
   }
 
@@ -82,6 +90,10 @@ class HomeState extends State<HomeScreen> implements HomeScreenContract {
   logout() async {
     _presenter.logout();
     Navigator.of(context).pushNamed("/login");
+  }
+
+  addFriend() async {
+    _presenter.addFriend();
   }
 
   @override

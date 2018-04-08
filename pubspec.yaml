@@ -1,5 +1,5 @@
-name: mobile
-description: A new Flutter project.
+name: feamer
+description: Beam up your files.
 
 dependencies:
   flutter:
@@ -14,12 +14,20 @@ dependencies:
   crypto: ^2.0.2
   scheduled_notifications: ^0.0.4
   web_socket_channel: ^1.0.7
-  flutter_launcher_icons: ^0.2.0
+  barcodescanner:
+      #this will be replaced with a proper dependency, once the plugin is release to dart-pub
+      git: https://github.com/swissonid/BarcodeScannerPlugin.git
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_launcher_icons: ^0.2.0
+
+flutter_icons:
+  image_path: "icon/launcher_icon.png"
+  android: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -61,5 +69,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies, 
   # see https://flutter.io/custom-fonts/#from-packages
-
-flutter_launcher_icons:

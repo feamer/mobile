@@ -1,5 +1,5 @@
-import 'package:mobile/data/database_helper.dart';
-import 'package:mobile/data/rest_ds.dart';
+import 'package:feamer/data/database_helper.dart';
+import 'package:feamer/data/rest_ds.dart';
 
 enum AuthState{ LOGGED_IN, LOGGED_OUT }
 

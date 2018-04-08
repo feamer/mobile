@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/auth.dart';
-import 'package:mobile/data/database_helper.dart';
-import 'package:mobile/models/user.dart';
-import 'package:mobile/screens/login/login_screen_presenter.dart';
+import 'package:feamer/auth.dart';
+import 'package:feamer/data/database_helper.dart';
+import 'package:feamer/models/user.dart';
+import 'package:feamer/screens/login/login_screen_presenter.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -62,8 +62,8 @@ class LoginScreenState extends State<LoginScreen>
       children: <Widget>[
         new Image(
           image: new AssetImage('images/feamer_logo.png'),
-          width: 200.0,
-          height: 200.0,
+          width: 180.0,
+          height: 180.0,
         ),
         new Form(
           key: formKey,
@@ -93,7 +93,7 @@ class LoginScreenState extends State<LoginScreen>
           ),
         ),
         new Padding(
-          padding: const EdgeInsets.only(top: 24.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: _isLoading ? new CircularProgressIndicator() : loginBtn,
         )
       ],

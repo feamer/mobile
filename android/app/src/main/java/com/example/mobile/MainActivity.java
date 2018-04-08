@@ -1,5 +1,6 @@
 package com.example.mobile;
 
+import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Builder;
@@ -36,7 +37,7 @@ public class MainActivity extends FlutterActivity {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       requestPermissions(new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-      requestPermissions(new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+      requestPermissions(new String[] {permission.CAMERA}, 1);
     }
 
     Intent shareIntent = new Intent(this, ShareService.class);
