@@ -54,6 +54,13 @@ class DatabaseHelper {
     return res.length > 0? true: false;
   }
 
+  Future<User> selectUser() async {
+    var dbClient = await db;
+    var res = await dbClient.query("User");
+    var user = res.single;
+    return new User.map(user);
+  }
+
   Future<String> selectToken() async {
     var dbClient = await db;
     var res = await dbClient.query("User");

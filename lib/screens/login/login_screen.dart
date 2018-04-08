@@ -52,17 +52,18 @@ class LoginScreenState extends State<LoginScreen>
   @override
   Widget build(BuildContext context) {
     _ctx = context;
-    var loginBtn = new RaisedButton(
+    var loginBtn = new IconButton(
       onPressed: _submit,
-      child: new Text("LOGIN"),
-      color: Colors.blue,
+      icon: new Icon(Icons.keyboard_arrow_right, color: Colors.blue),
+      iconSize: 80.0,
     );
 
     var loginForm = new Column(
       children: <Widget>[
-        new Text(
-          "Feamer",
-          textScaleFactor: 2.0,
+        new Image(
+          image: new AssetImage('images/feamer_logo.png'),
+          width: 200.0,
+          height: 200.0,
         ),
         new Form(
           key: formKey,
@@ -107,7 +108,7 @@ class LoginScreenState extends State<LoginScreen>
           child: new ClipRect(
             child: new Container(
               child: loginForm,
-              height: 300.0,
+              height: 500.0,
               width: 300.0,
             ),
           ),

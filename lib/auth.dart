@@ -1,4 +1,5 @@
 import 'package:mobile/data/database_helper.dart';
+import 'package:mobile/data/rest_ds.dart';
 
 enum AuthState{ LOGGED_IN, LOGGED_OUT }
 
@@ -22,7 +23,11 @@ class AuthStateProvider {
     var db = new DatabaseHelper();
     var isLoggedIn = await db.isLoggedIn();
     if (isLoggedIn) {
-      print(db.selectToken());
+      var api = new RestDatasource();
+      var user = await db.selectUser();
+      var updated = await api.loginHashed(user.username, user.password);
+      await db.deleteUsers();
+      await db.saveUser(updated);
       notify(AuthState.LOGGED_IN);
     } else {
       notify(AuthState.LOGGED_OUT);

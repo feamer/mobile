@@ -5,6 +5,12 @@ class User {
 
   User(this._username, this._password, this._token);
 
+  User.map(Map<String, dynamic> user) {
+   this._username = user["username"];
+   this._password = user["password"];
+   this._token = user["token"];
+  }
+
   String get username => _username;
   String get password => _password;
   String get token => _token;

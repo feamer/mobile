@@ -28,6 +28,26 @@ class RestDatasource {
     });
   }
 
+  Future<List<int>> download(String url) async {
+    var token = await db.selectToken();
+    var fileUrl = BASE_URL + url;
+    return _netUtil.getBytes(fileUrl, headers: {
+      "Authorization": token
+    }).then((dynamic res) {
+      return res;
+    });
+  }
+
+  Future<User> loginHashed(String username, String _hashPassword) {
+    return _netUtil.post(LOGIN_URL, body: json.encode({
+      "username": username,
+      "password": _hashPassword
+    })).then((dynamic res) {
+      print(res.toString());
+      return new User(username, _hashPassword, res.toString());
+    });
+  }
+
   Future<String> upload(File file) async {
     var token = await db.selectToken();
     return _netUtil.post(FILE_URL, headers: {
