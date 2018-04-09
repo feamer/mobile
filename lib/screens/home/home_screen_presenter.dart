@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/services.dart';
+import 'package:barcodescanner/barcodescanner.dart';
 import 'package:feamer/data/database_helper.dart';
 import 'package:feamer/data/rest_ds.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:scheduled_notifications/scheduled_notifications.dart';
 import 'package:web_socket_channel/io.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:barcodescanner/barcodescanner.dart';
 
 abstract class HomeScreenContract {
   onUploadSuccess(String uuid);
@@ -26,7 +26,9 @@ class HomeScreenPresenter {
   static const platform = const MethodChannel('app.channel.shared.data');
 
   HomeScreenPresenter(this._view) {
-    startWebSocket();
+    if (connection == null) {
+      startWebSocket();
+    }
   }
 
   doUpload(File file) {
@@ -52,16 +54,14 @@ class HomeScreenPresenter {
     print(data);
     var name = data["name"];
     await ScheduledNotifications.scheduleNotification(
-        new DateTime.now().millisecondsSinceEpoch,
-        "",
-        "Received File!!",
-        name);
+        new DateTime.now().millisecondsSinceEpoch, "", "Received File!!", name);
 
     await downloadFile(data);
   }
 
   downloadFile(dynamic data) async {
-    final dir = (await getExternalStorageDirectory()).path + "/Download/${data["name"]}";
+    final dir = (await getExternalStorageDirectory()).path +
+        "/Download/${data["name"]}";
     var file = new File(dir);
     var bytes = await api.download(data["endpoint"]);
     await file.writeAsBytes(bytes);
